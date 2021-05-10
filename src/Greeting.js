@@ -1,6 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const Greeting = (props) => {
+
+    const [greet, setGreet] = useState('Hello')
+    const [buttonShow, setButtonShow] = useState(true)
+    const [person, setPerson] = useState(props.person)
 
     const renderChildren = () => {
         return (
@@ -8,9 +12,22 @@ const Greeting = (props) => {
         )
     }
 
+    const handleBye = () => {
+        setGreet('Bye')
+        setButtonShow(false)
+        setPerson({...person, fName: 'Ivan'})
+    }
+
+    const renderButton = () => {
+        return (
+            buttonShow ? <button onClick={handleBye}>Bye</button> : null
+        )
+    }
+
     return (
         <div>
-            <h1>Hello, {props.name}!!!</h1>
+            <h1>{greet}, {person.fName}!!!</h1>
+            { renderButton() }
             {renderChildren()}
         </div>
     )
